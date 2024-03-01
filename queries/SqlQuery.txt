@@ -1,4 +1,7 @@
-INSERT INTO users (username, password, email, address, phone_number, age, gender, user_type, service_date) 
+
+------------------------------------------- User Table----------------------------------------------------------------
+
+NSERT INTO users (username, password, email, address, phone_number, age, gender, user_type, service_date) 
 VALUES 
 ('john_doe', 'Password123', 'john.doe@example.com', 'New York', '1234567890', 30, 'male', 'user', '2023-11-01 10:30:00 AM'),
 ('jane_smith', 'Password456', 'jane.smith@example.com', 'Los Angeles', '0987654321', 25, 'female', 'user', '2023-12-05 03:45:00 PM'),
@@ -24,3 +27,101 @@ VALUES
 ('pankil24', 'Pass', 'pankilpna24@gmail.com', 'Ahmedabad', '9727943136', 20, 'male', 'care_taker', '2023-08-01 12:40:24 AM'),
 ('pankil24', 'Pass', 'pankilpna24@gmail.com', 'Ahmedabad', '9727943136', 20, 'male', 'care_taker', '2023-09-01 12:40:24 AM'),
 ('pankil24', 'Pass', 'pankilpna24@gmail.com', 'Ahmedabad', '9727943136', 20, 'male', 'care_taker', '2023-10-01 12:40:24 AM');
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------service Table-------------------------------------------------------------------
+
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('pankil24', 'Max', 'golden_retriever', 5, 12, 5, 'male', 'dog_walking', 'NULL', '2024-03-02 09:00:00', '2024-03-02 10:00:00', '2024-03-02', 120);
+
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('pankil24', 'Buddy', 'pug', 4, 8, 3, 'male', 'grooming', 'NULL', '2024-04-15 14:00:00', '2024-04-15 16:00:00', '2024-04-15', 80);
+
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('pankil24', 'Bella', 'dalmatian', 7, 18, 2, 'female', 'veterinary_checkup', 'NULL', '2024-05-10 11:30:00', '2024-05-10 12:30:00', '2024-05-10', 150);
+
+-- Query 1
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user1', 'Buddy', 'labrador', 6, 25, 4, 'male', 'dog_walking', NULL, '2024-03-05 08:00:00', '2024-03-05 09:00:00', '2024-03-05', 80);
+
+-- Query 2
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user2', 'Max', 'golden_retriever', 7, 30, 3, 'male', 'dog_grooming', NULL, '2024-03-10 10:00:00', '2024-03-10 12:00:00', '2024-03-10', 120);
+
+-- Query 3
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user3', 'Lucy', 'pug', 5, 15, 2, 'female', 'dog_care', NULL, '2024-03-15 14:00:00', '2024-03-15 16:00:00', '2024-03-15', 100);
+
+-- Query 4
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user4', 'Rocky', 'dalmatian', 8, 20, 5, 'male', 'veterinary_checkup', NULL, '2024-04-01 09:30:00', '2024-04-01 10:30:00', '2024-04-01', 150);
+
+-- Query 5
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user5', 'Daisy', 'pomeranian', 4, 10, 1, 'female', 'dog_training', NULL, '2024-04-10 11:00:00', '2024-04-10 13:00:00', '2024-04-10', 90);
+
+-- Query 6
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user6', 'Charlie', 'boxer', 7, 28, 4, 'male', 'dog_walking', NULL, '2024-04-20 08:30:00', '2024-04-20 09:30:00', '2024-04-20', 80);
+
+-- Query 7
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user7', 'Bella', 'dachshund', 5, 12, 3, 'female', 'grooming', NULL, '2024-05-05 10:30:00', '2024-05-05 12:30:00', '2024-05-05', 110);
+
+-- Query 8
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user8', 'Molly', 'indian_spitz', 6, 16, 6, 'female', 'dog_care', NULL, '2024-05-15 13:00:00', '2024-05-15 15:00:00', '2024-05-15', 100);
+
+-- Query 9
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user9', 'Rocky', 'pug', 5, 18, 4, 'male', 'veterinary_checkup', NULL, '2024-06-01 11:00:00', '2024-06-01 12:00:00', '2024-06-01', 150);
+
+-- Query 10
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user10', 'Luna', 'labrador', 7, 26, 2, 'female', 'dog_training', NULL, '2024-06-10 14:00:00', '2024-06-10 16:00:00', '2024-06-10', 120);
+
+
+-- Query 11
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user11', 'Cooper', 'golden_retriever', 8, 32, 3, 'male', 'dog_grooming', NULL, '2024-06-15 09:00:00', '2024-06-15 11:00:00', '2024-06-15', 130);
+
+-- Query 12
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user12', 'Lola', 'pomeranian', 4, 11, 2, 'female', 'dog_walking', NULL, '2024-07-01 08:30:00', '2024-07-01 09:30:00', '2024-07-01', 90);
+
+-- Query 13
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user13', 'Rocky', 'labrador', 7, 28, 5, 'male', 'veterinary_checkup', NULL, '2024-07-10 10:00:00', '2024-07-10 11:00:00', '2024-07-10', 150);
+
+-- Query 14
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user14', 'Daisy', 'dachshund', 6, 14, 4, 'female', 'grooming', NULL, '2024-08-05 13:00:00', '2024-08-05 15:00:00', '2024-08-05', 110);
+
+-- Query 15
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user15', 'Buddy', 'boxer', 8, 30, 6, 'male', 'dog_training', NULL, '2024-08-15 14:30:00', '2024-08-15 16:30:00', '2024-08-15', 100);
+
+-- Query 16
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user16', 'Lucy', 'pug', 5, 16, 3, 'female', 'dog_care', NULL, '2024-09-01 11:00:00', '2024-09-01 12:00:00', '2024-09-01', 100);
+
+-- Query 17
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user17', 'Max', 'indian_spitz', 6, 20, 4, 'male', 'dog_walking', NULL, '2024-09-10 08:00:00', '2024-09-10 09:00:00', '2024-09-10', 80);
+
+-- Query 18
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user18', 'Molly', 'dalmatian', 7, 22, 5, 'female', 'dog_grooming', NULL, '2024-10-05 10:00:00', '2024-10-05 12:00:00', '2024-10-05', 120);
+
+-- Query 19
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user19', 'Charlie', 'pomeranian', 4, 12, 2, 'male', 'veterinary_checkup', NULL, '2024-10-15 11:30:00', '2024-10-15 12:30:00', '2024-10-15', 150);
+
+-- Query 20
+INSERT INTO service (username, dogname, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date, service_price) 
+VALUES ('user20', 'Luna', 'labrador', 7, 26, 3, 'female', 'dog_training', NULL, '2024-11-01 14:00:00', '2024-11-01 16:00:00', '2024-11-01', 120);
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------

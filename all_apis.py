@@ -138,7 +138,7 @@ def service():
         gender = data["gender"]
         servicetype = data["servicetype"]
         service_date = today.strftime("%Y-%m-%d %I:%M:%S %p")
-
+        service_price = 100
         print("servide date ==>", service_date)
 
         if "message" in data:
@@ -150,7 +150,7 @@ def service():
             start_datetime = datetime.strptime(data["start_datetime"], "%Y-%m-%d")
             end_datetime = datetime.strptime(data["end_datetime"], "%Y-%m-%d")
             mycursor.execute(
-                "INSERT INTO service (dogname, username, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                "INSERT INTO service (dogname, username, breed, height, weight, age, gender, servicetype, message, start_datetime, end_datetime, service_date,service_price) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)",
                 (
                     dogname,
                     username,
@@ -164,11 +164,12 @@ def service():
                     start_datetime,
                     end_datetime,
                     service_date,
+                    service_price,
                 ),
             )
         else:
             mycursor.execute(
-                "INSERT INTO service (dogname, username, breed, height, weight, age, gender, servicetype, message, service_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                "INSERT INTO service (dogname, username, breed, height, weight, age, gender, servicetype, message, service_date,service_price) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)",
                 (
                     dogname,
                     username,
@@ -180,6 +181,7 @@ def service():
                     servicetype,
                     message,
                     service_date,
+                    service_price,
                 ),
             )
 
@@ -297,9 +299,6 @@ def get_user_count():
     try:
         mycursor.execute("SELECT * FROM users")
         users_data = mycursor.fetchall()
-
-        # Filtering data to include only records with service_date month as 01 (January)
-        # Filtering data to include only records with service_date month as 01 (January)
         new_data = []
         for i in range(1, 13):
             if len("0" + str(i)) == 3:
@@ -343,7 +342,76 @@ def get_user_count():
     except Exception as e:
         conn.rollback()
         return jsonify(f"Error: {str(e)}"), 500
+@app.route("/serviceStats", methods=["GET"])
+def service_stats():
+    try:
+        mycursor.execute("SELECT * FROM service")
+        service_data = mycursor.fetchall()
+        
+        prices_by_month = {
+            "01": [],
+            "02": [],
+            "03": [],
+            "04": [],
+            "05": [],
+            "06": [],
+            "07": [],
+            "08": [],
+            "09": [],
+            "10": [],
+            "11": [],
+            "12": [],
+        }
+        
+        for data in service_data:
+            month = data[12][5:7]  # Extract month from the date
+            price = data[13]  # Extract the price
+            prices_by_month[month].append(price)  # Append the price to the corresponding month's list in the dictionary
+        
+        user_profit = {}  # Initialize a dictionary to store total price for each month
+        for month, prices in prices_by_month.items():
+            total_price = sum(prices)  # Calculate total price for the month
+            user_profit[month] = total_price  # Store total price for the month in user_profit dictionary
+        
+        new_data = []
+        for i in range(1, 13):  
+            if len("0" + str(i)) == 3:
+                count = len(
+                    [
+                        data
+                        for data in service_data
+                        if data[12][5:7] == ("0" + str(i)).lstrip("0")
+                    ]
+                )
+            else:
+                count = len(
+                    [data for data in service_data if data[12][5:7] == ("0" + str(i))]
+                )
 
+            new_data.append(count) 
+        
+        months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ]
+        
+        result = [
+            {"month": month, "service": count, "profit": user_profit.get(str(i).zfill(2), 0)} for i, (month, count) in enumerate(zip(months, new_data), start=1)
+        ]
+        return jsonify(result), 200
+    except Exception as e:
+        conn.rollback()
+        return jsonify(f"Error: {str(e)}"), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -383,7 +451,8 @@ CREATE TABLE service (
     message VARCHAR(255),
     start_datetime DATETIME ,
     end_datetime DATETIME ,
-    service_date VARCHAR(100) NOT NULL
+    service_date VARCHAR(100) NOT NULL,
+    service_price INT NOT NULL
 );
 
 CREATE TABLE dogs (
