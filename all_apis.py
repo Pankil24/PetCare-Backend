@@ -65,7 +65,7 @@ def register():
 def users():
     try:
         # Get pagination parameters from query string
-        page = int(request.args.get("page", 1))  # Default to page 1 if not provided
+        page = int(request.args.get("pageIndex", 1))  # Default to page 1 if not provided
         page_size = int(
             request.args.get("pageSize", 10)
         )  # Default page size to 10 if not provided
@@ -139,7 +139,6 @@ def service():
         servicetype = data["servicetype"]
         service_date = today.strftime("%Y-%m-%d %I:%M:%S %p")
         service_price = 100
-        print("servide date ==>", service_date)
 
         if "message" in data:
             message = data["message"]
@@ -254,8 +253,8 @@ def add_dog():
     try:
         data = request.get_json()
 
-        username = data["username"]
-        dogname = data["dogname"]
+        username = data["userName"]
+        dogname = data["dogName"]
         breed = data["breed"]
         height = data["height"]
         weight = data["weight"]
@@ -272,6 +271,31 @@ def add_dog():
         conn.rollback()
         return jsonify(f"Error: {str(e)}"), 500
 
+@app.route("/updateDog/<int:dog_id>", methods=["PUT"])
+def update_dog(dog_id):
+    try:
+        data = request.get_json()
+
+        username = data["userName"]
+        dogname = data["dogName"]
+        breed = data["breed"]
+        height = data["height"]
+        weight = data["weight"]
+        age = data["age"]
+        gender = data["gender"]
+
+        # Update the dog entry with the provided dog_id
+        mycursor.execute(
+            "UPDATE dogs SET username=%s, dogname=%s, breed=%s, height=%s, weight=%s, age=%s, gender=%s WHERE id=%s",
+            (username, dogname, breed, height, weight, age, gender, dog_id),
+        )
+        conn.commit()
+        return jsonify("Dog updated successfully"), 200
+
+    except Exception as e:
+        conn.rollback()
+        return jsonify(f"Error: {str(e)}"), 500
+
 
 @app.route("/dogData", methods=["GET"])
 def get_dog_data():
@@ -281,14 +305,12 @@ def get_dog_data():
         mycursor.execute("select * from dogs where username = %s", (userName,))
         user_data = mycursor.fetchall()
 
-        print("USER Data =>", user_data)
-
         user_list = [
             {mycursor.description[i][0]: value for i, value in enumerate(row)}
             for row in user_data
         ]
 
-        return user_list, 200
+        return jsonify(user_list), 200
     except Exception as e:
         conn.rollback()
         return jsonify(f"Error: {str(e)}"), 500
@@ -314,8 +336,6 @@ def get_user_count():
                     [data for data in users_data if data[9][5:7] == ("0" + str(i))]
                 )
             new_data.append(count)
-
-        print("New Data ==>", new_data)
 
         months = [
             "January",

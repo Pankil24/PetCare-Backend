@@ -1,7 +1,7 @@
 
 ------------------------------------------- User Table----------------------------------------------------------------
 
-NSERT INTO users (username, password, email, address, phone_number, age, gender, user_type, service_date) 
+INSERT INTO users (username, password, email, address, phone_number, age, gender, user_type, service_date) 
 VALUES 
 ('john_doe', 'Password123', 'john.doe@example.com', 'New York', '1234567890', 30, 'male', 'user', '2023-11-01 10:30:00 AM'),
 ('jane_smith', 'Password456', 'jane.smith@example.com', 'Los Angeles', '0987654321', 25, 'female', 'user', '2023-12-05 03:45:00 PM'),
