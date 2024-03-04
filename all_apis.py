@@ -112,9 +112,8 @@ def login():
         mycursor.execute(query, (username, password))
 
         user_data = mycursor.fetchone()
-
         if user_data:
-            mess = {"message": "User Exist", "userName": user_data[1]}
+            mess = {"message": "User Exist", "userName": user_data[1],"userType":user_data[8]}
         else:
             mess = "User not Exist"
 
