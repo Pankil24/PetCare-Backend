@@ -73,7 +73,9 @@ def register():
                         service_date,
                     ),
                 )
-                conn.commit()
+
+
+            conn.commit()
             return jsonify("Data Inserted succussfully"), 200
 
     except Exception as e:
