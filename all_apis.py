@@ -39,9 +39,12 @@ def register():
             print("user exist ==>", user_exist)
             return jsonify("User name exist"), 201
         else:
-            mycursor.execute(
-                "INSERT INTO users (username,password ,email, address, phone_number, age, gender, user_type,service_date) VALUES (%s, %s,%s, %s, %s, %s, %s, %s,%s)",
-                (
+            if "startTime" in data and "endTime" in data:
+                startTime = data["startTime"]
+                endTime = data["endTime"]
+                mycursor.execute(
+                    "INSERT INTO users (username,password ,email, address, phone_number, age, gender, user_type,service_date,start_time,end_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    (
                     username,
                     password,
                     email,
@@ -51,9 +54,26 @@ def register():
                     gender,
                     user_type,
                     service_date,
+                    startTime,
+                    endTime,
                 ),
             )
-            conn.commit()
+            else:
+                mycursor.execute(
+                    "INSERT INTO users (username,password ,email, address, phone_number, age, gender, user_type,service_date) VALUES (%s, %s,%s, %s, %s, %s, %s, %s,%s)",
+                    (
+                        username,
+                        password,
+                        email,
+                        address,
+                        phone_number,
+                        age,
+                        gender,
+                        user_type,
+                        service_date,
+                    ),
+                )
+                conn.commit()
             return jsonify("Data Inserted succussfully"), 200
 
     except Exception as e:
@@ -454,7 +474,9 @@ CREATE TABLE users (
     age INT NOT NULL,
     gender ENUM('male', 'female', 'other') NOT NULL,
     user_type ENUM('user','care_taker' ,'admin') NOT NULL,
-    service_date VARCHAR(100) NOT NULL
+    service_date VARCHAR(100) NOT NULL,
+    start_time VARCHAR(50),
+    end_time VARCHAR(50)
 );
 
 CREATE TABLE service (
